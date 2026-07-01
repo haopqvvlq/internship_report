@@ -155,3 +155,115 @@ const int a = 10;
 
 volatile int status;
 ```
+
+## 2. Variables
+
+### 2.1 Khai báo biến (Declaration)
+
+**Định nghĩa**
+
+Đặt tên và chỉ định kiểu dữ liệu cho biến.
+
+**Mục đích**
+
+Để compiler biết biến có kiểu dữ liệu gì.
+
+**Ví dụ**
+
+```c
+int a;
+float b;
+```
+
+### 2.2 Khởi tạo biến (Initialization)
+
+**Định nghĩa**
+
+Gán giá trị ban đầu cho biến ngay khi khai báo.
+
+**Mục đích**
+
+Giúp biến có giá trị xác định ngay từ đầu.
+
+**Ví dụ**
+
+```c
+int a = 10;
+float b = 3.14f;
+```
+
+### 2.3 Scope (Phạm vi)
+
+**Định nghĩa**
+
+Là phạm vi mà một biến có thể được truy cập.
+
+**File scope**
+
+Biến được khai báo ngoài mọi hàm, có thể được sử dụng trong phạm vi file.
+
+**Block scope**
+
+Biến được khai báo trong một khối `{ }`, chỉ sử dụng được trong khối đó.
+
+**Phân loại biến theo phạm vi**
+
+- Global variable
+- Local variable
+
+### 2.4 Lifetime (Thời gian tồn tại)
+
+**Định nghĩa**
+
+Là khoảng thời gian một biến tồn tại trong bộ nhớ.
+
+**Automatic**
+
+Được tạo khi vào block/hàm và bị hủy khi thoát block/hàm.
+
+**Static**
+
+Được tạo một lần và tồn tại đến khi chương trình kết thúc.
+
+### 2.5 Storage Class
+
+**Định nghĩa**
+
+Quy định cách lưu trữ, phạm vi và thời gian tồn tại của biến.
+
+- `auto`: Biến cục bộ mặc định.
+- `static`: Giữ giá trị giữa các lần gọi hàm hoặc giới hạn phạm vi trong file.
+- `extern`: Khai báo biến được định nghĩa ở nơi khác.
+- `register`: Gợi ý compiler lưu biến vào thanh ghi CPU (compiler có thể bỏ qua).
+
+### 2.6 Declaration vs Definition
+
+**Declaration**
+
+Thông báo tên và kiểu của biến để compiler biết biến tồn tại.
+
+```c
+extern int count;
+```
+
+**Definition**
+
+Tạo biến và cấp phát bộ nhớ cho biến.
+
+```c
+int count = 0;
+```
+
+### 2.7 Memory Segments
+
+**Stack**
+
+Chứa các biến cục bộ thông thường.
+
+**Data**
+
+Chứa biến toàn cục hoặc `static` đã được khởi tạo.
+
+**BSS**
+
+Chứa biến toàn cục hoặc `static` chưa được khởi tạo hoặc được khởi tạo bằng `0`.
