@@ -267,3 +267,197 @@ Chứa biến toàn cục hoặc `static` đã được khởi tạo.
 **BSS**
 
 Chứa biến toàn cục hoặc `static` chưa được khởi tạo hoặc được khởi tạo bằng `0`.
+
+## 3. Operators
+
+### 3.1 Toán tử số học (Arithmetic Operators)
+
+**Định nghĩa**
+
+Thực hiện các phép tính số học cơ bản.
+
+**Các toán tử**
+
+`+` `-` `*` `/` `%`
+
+**Ví dụ**
+
+```c
+int c = a + b;
+int r = a % b;
+```
+
+### 3.2 Toán tử gán (Assignment Operators)
+
+**Định nghĩa**
+
+Gán hoặc cập nhật giá trị cho biến.
+
+**Các toán tử**
+
+`=` `+=` `-=` `*=` `/=` `%=` `<<=` `>>=` `&=` `|=` `^=`
+
+**Ví dụ**
+
+```c
+a += 5;
+```
+
+### 3.3 Toán tử tăng giảm (Increment / Decrement)
+
+**Định nghĩa**
+
+Tăng hoặc giảm giá trị của biến đi 1.
+
+**Prefix (`++a`)**
+
+Tăng trước rồi mới sử dụng.
+
+**Postfix (`a++`)**
+
+Sử dụng trước rồi mới tăng.
+
+**Ví dụ**
+
+```c
+++a;
+b = a++;
+```
+
+### 3.4 Toán tử so sánh (Relational Operators)
+
+**Định nghĩa**
+
+So sánh hai giá trị, kết quả trả về là `0` hoặc `1`.
+
+**Các toán tử**
+
+`==` `!=` `>` `<` `>=` `<=`
+
+**Ví dụ**
+
+```c
+if (a >= b)
+```
+
+### 3.5 Toán tử logic (Logical Operators)
+
+**Định nghĩa**
+
+Kết hợp hoặc phủ định các điều kiện logic, kết quả trả về là `0` hoặc `1`.
+
+**Các toán tử**
+
+`&&` `||` `!`
+
+**Short-circuit**
+
+Nếu kết quả đã được xác định thì các biểu thức còn lại sẽ không được đánh giá.
+
+**Ví dụ**
+
+```c
+if (a > 0 && b > 0)
+```
+
+### 3.6 Toán tử thao tác bit (Bitwise Operators)
+
+**Định nghĩa**
+
+Thực hiện các phép toán trực tiếp trên từng bit của số nguyên.
+
+**Các toán tử**
+
+`&` `|` `^` `~` `<<` `>>`
+
+**Ứng dụng**
+
+- Set bit
+- Clear bit
+- Toggle bit
+- Check bit
+
+**Ví dụ**
+
+```c
+reg |= (1 << 3);
+```
+
+### 3.7 Toán tử điều kiện (Conditional Operator)
+
+**Định nghĩa**
+
+Viết gọn câu lệnh `if...else`.
+
+**Cú pháp**
+
+```c
+condition ? expr1 : expr2;
+```
+
+**Ví dụ**
+
+```c
+max = (a > b) ? a : b;
+```
+
+### 3.8 Toán tử địa chỉ và giải tham chiếu
+
+**Định nghĩa**
+
+Làm việc với địa chỉ bộ nhớ và con trỏ.
+
+- `&`: Lấy địa chỉ của biến.
+- `*`: Truy cập giá trị tại địa chỉ mà con trỏ đang trỏ tới.
+
+**Ví dụ**
+
+```c
+int *p = &a;
+printf("%d", *p);
+```
+
+### 3.9 Toán tử dấu phẩy (Comma Operator)
+
+**Định nghĩa**
+
+Đánh giá nhiều biểu thức từ trái sang phải và trả về giá trị của biểu thức cuối cùng.
+
+**Ví dụ**
+
+```c
+a = (x = 3, x + 2);
+```
+
+### 3.10 Độ ưu tiên và tính kết hợp (Operator Precedence & Associativity)
+
+**Định nghĩa**
+
+Quy định thứ tự thực hiện và hướng kết hợp của các toán tử trong một biểu thức.
+
+**Ví dụ**
+
+```c
+a + b * c;
+x = y = z = 0;
+```
+
+**Lưu ý**
+
+Có thể dùng dấu `()` để làm rõ thứ tự tính toán.
+
+### 3.11 Hành vi không xác định (Undefined Behavior)
+
+**Định nghĩa**
+
+Là những trường hợp mà chuẩn C không quy định kết quả. Chương trình có thể hoạt động khác nhau tùy compiler hoặc môi trường.
+
+**Ví dụ**
+
+```c
+i = i++;
+```
+
+**Lưu ý**
+
+Không nên thay đổi cùng một biến nhiều lần trong một biểu thức.
