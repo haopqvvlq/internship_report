@@ -1,3 +1,14 @@
+# Đánh giá chung
+
+Với mục tiêu "hiểu tổng quan và đủ dùng CMake cho Linux BSP", mình đánh giá mức độ ưu tiên của các Step như sau:
+
+⭐⭐⭐⭐⭐ Phải nắm chắc: Step 0, Step 1, Step 3, Step 4.
+⭐⭐⭐⭐ Nên hiểu: Step 2, Step 10.
+⭐⭐⭐ Biết để đọc code: Step 5, Step 7, Step 9.
+⭐⭐ Chỉ cần biết khái niệm: Step 6, Step 8.
+
+Chỉ cần nắm tốt các Step ưu tiên cao, bạn đã có thể đọc và chỉnh sửa phần lớn các CMakeLists.txt trong các dự án Linux BSP thực tế.
+
 # Step 0: Tổng quan về CMake
 
 ## Mục tiêu
