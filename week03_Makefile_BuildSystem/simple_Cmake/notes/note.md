@@ -155,41 +155,136 @@ add_test(NAME mytest COMMAND app)
 
 ## Ví dụ một project hoàn chỉnh
 
-```
-project/
-│
-├── CMakeLists.txt
-├── include/
-│   └── math.h
-├── main.c
-└── math.c
-```
+1. Project đơn giản
 
-`CMakeLists.txt`
+   ```
+   project/
+   │
+   ├── CMakeLists.txt
+   ├── include/
+   │   └── math.h
+   ├── main.c
+   └── math.c
+   ```
 
-```cmake
-cmake_minimum_required(VERSION 3.16)
+   **CMakeLists.txt**
 
-project(MyProject C)
+   ```cmake
+   cmake_minimum_required(VERSION 3.16)
 
-set(CMAKE_C_STANDARD 11)
+   project(MyProject C)
 
-add_library(math
-    math.c
-)
+   set(CMAKE_C_STANDARD 11)
 
-add_executable(app
-    main.c
-)
+   add_library(math
+       math.c
+   )
 
-target_include_directories(app PRIVATE
-    include
-)
+   add_executable(app
+       main.c
+   )
 
-target_link_libraries(app PRIVATE
-    math
-)
-```
+   target_include_directories(app PRIVATE
+       include
+   )
+
+   target_link_libraries(app PRIVATE
+       math
+   )
+   ```
+
+2. Project gồm nhiều module
+
+   ```
+
+   Project/
+   │
+   ├── CMakeLists.txt          <-- Root CMakeLists
+   │
+   ├── app/
+   │   ├── CMakeLists.txt
+   │   └── main.c
+   │
+   ├── math/
+   │   ├── CMakeLists.txt
+   │   ├── math.c
+   │   └── math.h
+   │
+   ├── driver/
+   │   ├── CMakeLists.txt
+   │   ├── gpio.c
+   │   └── gpio.h
+   │
+   └── utils/
+       ├── CMakeLists.txt
+       ├── log.c
+       └── log.h
+
+   ```
+
+   **Root CMakeLists**
+
+   Nó có nhiệm vụ:
+   - Khai báo project
+   - Thiết lập chung
+   - Thêm các module con
+
+   Ví dụ:
+
+   ```cmake
+   cmake_minimum_required(VERSION 3.16)
+
+   project(MyProject C)
+
+   add_subdirectory(math)
+   add_subdirectory(driver)
+   add_subdirectory(utils)
+   add_subdirectory(app)
+   ```
+
+   Bạn có thể hiểu đơn giản:
+
+   > "Đi vào thư mục math, đọc math/CMakeLists.txt."
+
+   Sau đó:
+
+   > "Đi vào driver, đọc driver/CMakeLists.txt."
+
+   ...
+
+   **math/CMakeLists.txt**
+
+   Chỉ lo tạo thư viện của mình.
+
+   ```cmake
+   add_library(math
+   math.c
+   )
+
+   target_include_directories(math PUBLIC .)
+   ```
+
+   **driver/CMakeLists.txt**
+
+   ```cmake
+   add_library(driver
+   gpio.c
+   )
+   ```
+
+   **app/CMakeLists.txt**
+
+   ```cmake
+    add_executable(app
+        main.c
+    )
+
+    target_link_libraries(app
+        PRIVATE
+            math
+            driver
+    )
+   ```
 
 ---
 
@@ -197,20 +292,20 @@ target_link_libraries(app PRIVATE
 
 ```text
 Đọc CMakeLists.txt
-        │
-        ▼
+     │
+     ▼
 Thực thi từng lệnh từ trên xuống dưới
-        │
-        ▼
+     │
+     ▼
 Tạo các target
-        │
-        ▼
+     │
+     ▼
 Cấu hình các target
-        │
-        ▼
+     │
+     ▼
 Sinh hệ thống build
 (Makefile, Ninja, ...)
-        │
-        ▼
+     │
+     ▼
 Build bằng công cụ tương ứng
 ```
