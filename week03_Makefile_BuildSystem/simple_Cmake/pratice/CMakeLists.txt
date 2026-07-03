@@ -4,7 +4,7 @@ project(MyProject C)
 
 add_executable(main
     main.c
-    src/lib.c
+    src/quanly.c
 )
 
 target_include_directories(main PRIVATE
