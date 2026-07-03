@@ -1,0 +1,3 @@
+/home/hao/Desktop/Working_Space/internship_report/week03_Makefile_BuildSystem/simple_Cmake/build/CMakeFiles/main.dir
+/home/hao/Desktop/Working_Space/internship_report/week03_Makefile_BuildSystem/simple_Cmake/build/CMakeFiles/edit_cache.dir
+/home/hao/Desktop/Working_Space/internship_report/week03_Makefile_BuildSystem/simple_Cmake/build/CMakeFiles/rebuild_cache.dir
