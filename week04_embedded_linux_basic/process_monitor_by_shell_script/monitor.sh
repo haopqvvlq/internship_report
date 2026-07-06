@@ -2,7 +2,7 @@
 
 PROCESS_NAME="bash"
 
-PID=$(pgrep "$PROCESS_NAME")
+PID=$(pgrep -x "$PROCESS_NAME" | head -n 1)
 
 if [ -n "$PID" ]; then
     echo "Process '$PROCESS_NAME' đang chạy."
