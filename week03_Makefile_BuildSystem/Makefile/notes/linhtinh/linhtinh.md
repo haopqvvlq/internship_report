@@ -1,74 +1,3 @@
-# 1. Timestamp trong Make
-
-`make` quyết định có build lại hay không dựa trên **timestamp** (thời gian sửa đổi cuối cùng của file), không dựa trên nội dung file.
-
-Nguyên tắc:
-
-- Nếu target chưa tồn tại → build.
-- Nếu một dependency mới hơn target → build lại target.
-- Nếu target mới hơn tất cả dependency → `target is up to date`.
-
-Ví dụ:
-
-main.c → main.o → main
-
-Nếu `main.c` được sửa (hoặc `touch main.c`):
-
-- `main.c` mới hơn `main.o` ⇒ build lại `main.o`
-- `main.o` mới hơn `main` ⇒ build lại `main`
-
-Lưu ý:
-
-- `make` không biết nội dung có thay đổi hay không.
-- Chỉ cần timestamp thay đổi (ví dụ dùng `touch`) là `make` có thể build lại.
-
-# 2. Vì sao chương trình phải tạo ra file `.o` trước khi tạo file thực thi?
-
-Nếu không có `.o`:
-
-```make
-main.c
-lib.c
-util.c
-...
-```
-
-mỗi lần sửa 1 file:
-
-```make
-main.c thay đổi
-↓
-phải biên dịch lại toàn bộ project
-```
-
-Rất tốn thời gian khi project có hàng trăm hoặc hàng nghìn file.
-
-Vì vậy quy trình được tách thành 2 bước:
-
-```make
-main.c ──► main.o
-lib.c  ──► lib.o
-util.c ──► util.o
-               ↓
-          linker
-               ↓
-             app
-```
-
-`.o` (object file) là kết quả biên dịch từng file nguồn riêng lẻ.
-
-Khi main.c thay đổi:
-
-```make
-main.c ──► main.o   (build lại)
-lib.o             (giữ nguyên)
-util.o            (giữ nguyên)
-↓
-link lại app
-```
-
-nhanh hơn rất nhiều.
-
 # 1. Phân phối thư viện dưới dạng `.a` để bảo vệ mã nguồn
 
 Một lý do quan trọng khiến Static Library (`.a`) vẫn được sử dụng là để phân phối thư viện mà không cần công khai mã nguồn.
@@ -117,7 +46,6 @@ Vì vậy, phát hành thư viện dưới dạng `.a` là một cách cân bằ
 
 - Cho phép khách hàng sử dụng sản phẩm.
 - Bảo vệ tài sản trí tuệ của nhà phát triển.
-
 # 2. Linker và Dynamic Linker
 
 Khi xây dựng và chạy một chương trình trên Linux, có hai thành phần khác nhau thường dễ bị nhầm lẫn: **Linker** và **Dynamic Linker**.
@@ -128,9 +56,9 @@ Linker là công cụ làm việc trong quá trình **build chương trình**.
 
 Sau khi compiler dịch các file `.c` thành các file object (`.o`), linker sẽ:
 
-- Ghép các file `.o` lại với nhau.
-- Tìm các hàm và biến còn thiếu trong các thư viện (`.a`, `.so`).
-- Tạo ra file thực thi cuối cùng (executable).
+* Ghép các file `.o` lại với nhau.
+* Tìm các hàm và biến còn thiếu trong các thư viện (`.a`, `.so`).
+* Tạo ra file thực thi cuối cùng (executable).
 
 Ví dụ:
 
@@ -148,10 +76,10 @@ Dynamic Linker (hay Dynamic Loader) làm việc khi **chương trình được c
 
 Nếu executable phụ thuộc vào các Shared Library (`.so`), Dynamic Linker sẽ:
 
-- Đọc danh sách các thư viện mà chương trình cần.
-- Tìm các file `.so` tương ứng.
-- Nạp chúng vào RAM.
-- Kết nối chương trình với các thư viện trước khi bắt đầu thực thi.
+* Đọc danh sách các thư viện mà chương trình cần.
+* Tìm các file `.so` tương ứng.
+* Nạp chúng vào RAM.
+* Kết nối chương trình với các thư viện trước khi bắt đầu thực thi.
 
 Nếu không tìm thấy thư viện cần thiết, chương trình sẽ báo lỗi:
 
@@ -214,12 +142,12 @@ Executable chỉ chứa thông tin tham chiếu đến thư viện. Khi chạy, 
 
 Linux thường lưu một thư viện dưới nhiều tên khác nhau để phục vụ các mục đích khác nhau trong quá trình **build** và **runtime**.
 
-| File            | Vai trò                              |
-| --------------- | ------------------------------------ |
-| `libxxx.a`      | Static Library                       |
-| `libxxx.so`     | Symlink dùng lúc build (`gcc -lxxx`) |
-| `libxxx.so.N`   | Symlink theo major version           |
-| `libxxx.so.N.M` | Shared Library thật sự               |
+| File | Vai trò |
+|--------|--------|
+| `libxxx.a` | Static Library |
+| `libxxx.so` | Symlink dùng lúc build (`gcc -lxxx`) |
+| `libxxx.so.N` | Symlink theo major version |
+| `libxxx.so.N.M` | Shared Library thật sự |
 
 Ví dụ:
 
@@ -230,7 +158,7 @@ libreadline.so.6    -> libreadline.so.6.3
 libreadline.so.6.3
 ```
 
-Hiểu đơn giản thì Linux cung cấp một thư viện dưới 2 dạng `Static Lib` và `Shared Lib`.
+Hiểu đơn giản thì Linux cung cấp một thư viện dưới 2 dạng `Static Lib` và `Shared Lib`.   
 
 Với Shared Library (`.so`) phải có cơ chế version:
 

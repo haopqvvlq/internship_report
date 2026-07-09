@@ -2,7 +2,7 @@
 
 Khi mới học Linux, rất dễ nhầm lẫn giữa **Terminal**, **Shell**, **Bash** và **Kernel** vì chúng luôn xuất hiện cùng nhau. Thực tế, mỗi thành phần có một vai trò riêng.
 
-## 1. Mô hình tổng quan
+# 1. Mô hình tổng quan
 
 Luồng làm việc của một câu lệnh trong Linux:
 
