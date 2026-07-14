@@ -1,0 +1,65 @@
+# =========================
+# C/C++ build artifacts
+# =========================
+*.o
+*.obj
+*.d
+*.a
+*.la
+*.lo
+*.so
+*.so.*
+*.dll
+*.dylib
+*.lib
+*.elf
+*.out
+*.exe
+
+# =========================
+# Linux Kernel Module
+# =========================
+*.ko
+*.mod
+*.mod.c
+*.mod.o
+.*.cmd
+Module.symvers
+modules.order
+built-in.a
+.tmp_versions/
+
+# =========================
+# CMake
+# =========================
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# =========================
+# Editor / IDE
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Cache
+# =========================
+.cache/
+
+# =========================
+# Tags
+# =========================
+tags
+cscope.*

@@ -762,12 +762,12 @@ DEP := $(OBJ:.o=.d)
 CFLAGS := -Wall -Wextra -std=c11 -Ilib -MMD -MP
 
 $(TARGET): $(OBJ)
-$(CC) $^ -o $@
+	$(CC) $^ -o $@
 
 -include $(DEP)
 
 .PHONY: clean
 
 clean:
-rm -f $(TARGET) $(OBJ) $(DEP)
+	rm -f $(TARGET) $(OBJ) $(DEP)
 ```
